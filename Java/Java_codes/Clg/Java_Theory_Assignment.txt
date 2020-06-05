@@ -1,0 +1,382 @@
+﻿Java Theory Assignment
+
+
+Question 1: How will you create your own collection 
+type explain it with a suitable programming example.
+
+Answer1-A)
+
+The process of writing a custom implementation follows:
+
+Choose the appropriate abstract implementation class .
+
+Provide implementations for all the abstract methods of the class.
+The API documentation for the abstract implementation class will tell you which methods to override.
+
+Test and, if necessary, debug the implementation.
+
+Answer1-B)
+
+Attached file named Triplet.java
+
+Made Triplet custom collection.
+
+Below is the list of methods that are present in that Collection.
+
+public boolean add(Object a,Object b,Object c);
+public boolean addAll(Triplet t);
+public void clear();
+public boolean contains(Object a,Object b,Object c);
+public int size() ;
+public boolean isEmpty();
+
+
+Question 2: What do you mean by thread Synchronization.
+what are the possible ways available in java to handle the 
+Synchronization problem.
+
+
+Answer2-A)
+Thread synchronization is the concurrent execution of two or more threads that share critical resources. Threads should be synchronized to avoid critical resource use conflicts. Otherwise, conflicts may arise when parallel-running threads attempt to modify a common variable at the same time.
+
+Synchronization in Java will only be needed if shared object is mutable. if your shared object is either read-only or immutabble object, then you don't need synchronization, despite running multiple threads
+You can use java synchronized keyword only on synchronized method or synchronized block.
+
+Concurrent access of shared objects in Java introduces to kind of errors: thread interference and memory consistency errors and to avoid these errors you need to properly synchronize your Java object to allow mutual exclusive access of critical section to two threads. 
+
+Synchronized Method: Includes the synchronized keyword in its declaration. When a thread invokes a synchronized method, synchronized method automatically acquires the intrinsic lock for that method's object and releases it when the method returns, even if that return was caused by an uncaught exception.
+
+Synchronized Statement: Declares a block of code to be synchronized. Unlike synchronized methods, synchronized statements should specify the objects that provide the intrinsic lock. These statements are useful for improving concurrency with fine-grained synchronization, as they enable the avoidance of unnecessary blocking.
+
+Synchronized Methods
+We use Java’s synchronized keyword on method to prevent multiple threads from accessing it concurrently 
+Example:- 
+public synchronized void increment() {
+        count = count + 1;
+    }
+The synchronized keyword makes sure that only one thread can enter the increment() method at one time.
+
+Synchronized Blocks
+
+Java internally uses a so-called intrinsic lock or monitor lock to manage thread synchronization. 
+synchronized keyword can also be used as a block statement, but unlike synchronized method, synchronized statements must specify the object that provides the intrinsic lock 
+
+
+public void increment() {
+    // Synchronized Block - 
+
+    // Acquire Lock
+    synchronized (this) { 
+        count = count + 1;
+    }   
+    // Release Lock…
+
+
+
+Answer2-B)
+To handle the Synchronization problem:
+
+
+Software approach known as Peterson’s Solution is best for Synchronization. It uses two variables in the Entry Section so as to maintain consistency, like Flag (boolean variable) and Turn variable(storing the process states). It satisfy all the three Critical Section requirements.
+
+The Hardware Approach of synchronization can be done through Lock & Unlock technique.Locking part is done in the Entry Section, so that only one process is allowed to enter into the Critical Section, after it complete its execution, the process is moved to the Exit Section, where Unlock Operation is done so that another process in the Lock Section can repeat this process of Execution.
+
+Using Interrupts –
+These are easy to implement.When Interrupt are disabled then no other process is allowed to perform Context Switch operation that would allow only one process to enter into the Critical State.
+
+
+The monitor is used to achieve mutual exclusion between processes. For example Java Synchronized methods. Java provides wait() and notify() constructs.
+Condition Variables:
+Two different operations are performed on the condition variables of the monitor.
+Wait.
+signal.
+
+The Bakery algorithm is one of the simplest known solutions to the mutual exclusion problem for the general case of N process. Bakery Algorithm is a critical section solution for N processes. The algorithm preserves the first come first serve property.
+
+Before entering its critical section, the process receives a number. Holder of the smallest number enters the critical section.
+If processes Pi and Pj receive the same number,
+if i < j 
+Pi is served first; 
+else 
+Pj is served first.
+The numbering scheme always generates numbers in increasing order of enumeration; i.e., 1, 2, 3, 3, 3, 3, 4, 5, …
+Notation – lexicographical order (ticket #, process id #) – Firstly the ticket number is compared. If same then the process ID is compared next
+
+Dekker’s Algorithm :
+It allows two threads to share a single-use resource without conflict, using only shared memory for communication.  
+Idea is to use favoured thread notion to determine entry to the critical section. Favoured thread alternates between the thread providing mutual exclusion and avoiding deadlock, indefinite postponement or lockstep synchronization.
+
+
+
+
+Question 3: What is blocking Queue, explain the concept of 
+thread pooling and its application in the real life enterprise 
+applicaton development
+
+
+Answer3-A)
+
+A blocking queue is a queue that blocks when you try to dequeue from it and the queue is empty, or if you try to enqueue items to it and the queue is already full. A thread trying to dequeue from an empty queue is blocked until some other thread inserts an item into the queue. A thread trying to enqueue an item in a full queue is blocked until some other thread makes space in the queue, either by dequeuing one or more items or clearing the queue completely.
+
+
+Implementation
+
+public class BlockingQueue {
+
+  private List queue = new LinkedList();
+  private int  limit = 10;
+
+  public BlockingQueue(int limit){
+    this.limit = limit;
+  }
+
+
+  public synchronized void enqueue(Object item) throws InterruptedException  {
+	 while(this.queue.size() == this.limit) {
+	      wait();
+	    }
+	    if(this.queue.size() == 0) {
+	      notifyAll();
+	    }
+	    this.queue.add(item);
+	  }
+
+
+	  public synchronized Object dequeue() throws InterruptedException{
+	    while(this.queue.size() == 0){
+	      wait();
+	    }
+	    if(this.queue.size() == this.limit){
+	      notifyAll();
+	    }
+
+	    return this.queue.remove(0);
+	  }
+
+	}
+
+Java Thread pool represents a group of worker threads that are waiting for the job and reuse many times.
+
+In case of thread pool, a group of fixed size threads are created. A thread from the thread pool is pulled out and assigned a job by the service provider. After completion of the job, thread is contained in the thread pool again
+
+
+Advantage of Java Thread Pool
+
+Better performance It saves time because there is no need to create new thread.
+
+
+Real time usage
+
+It is used in Servlet and JSP where container creates a thread pool to process the request.
+
+
+For real time example :
+
+MS word
+You are typing a paragraph on MS word. But in background one more thread running and checking your spelling mistakes. As soon as you do a typo the other thread notifies you about the typo.. And makes your life easy.
+
+Online bus/anything ticket booking : 
+Here many users trying to book available ticket at same time (ex : tatkal booking ) , here application needs to handle different threads (diff users request to server ) , if tickets sold out/not available then rest users will get correct response as not available to book .
+
+Joint Account holder having multiple ATM cards for same account and trying to perform operation same time . At time one operation is handled for account and then next one on updated data.
+
+A few real-life use-cases (in context to software engg.)
+
+- Massively parallel server monitoring infrastructure, for example u are required to monitor 30K servers/routers every 5 seconds
+- long running applications like batch jobs, do well when multithreaded.
+- Any GUI toolkit, like Swing, Javafx, SWT/JFace all uses threads to keep track of events generating from various widgets in the GUI
+- HTTP/JEE servers/frameworks like vert.x, wildfly, tomcat, jetty uses multithreads along with NIO to achieve high throughput.
+- JUnit uses threads to run test cases in parallel.
+- Computer games, exemplery multi-threaded processing.
+
+Question 4: Write a simple timer program that can periodically 
+print a timeout message.
+
+Attached File named Timerr.java
+
+Task performed is printing numbers
+Time Limit is 3 sec.
+
+if number reached till 8450 after 2 sec sleep
+	Task is finished
+else
+	timeout message printed on screen	
+
+
+Question 5: What are the different types of Events used in 
+AWT/SWING programming. Explain various methods available for 
+handling mouse and key board related events.
+
+
+Answer5-A)
+
+Java core consists of 12 event types defined in java.awt.events:
+
+ActionEvent
+AdjustmentEvent
+ComponentEvent
+ContainerEvent
+FocusEvent
+InputEvent
+ItemEvent
+KeyEvent
+MouseEvent
+PaintEvent
+TextEvent
+WindowEvent
+
+ActionEvent: Represents a graphical element is clicked, such as a button or item in a list. Related listener: ActionListener.
+
+ContainerEvent: Represents an event that occurs to the GUI's container itself, for example, if a user adds or removes an object from the interface. Related listener: ContainerListener.
+
+KeyEvent: Represents an event in which the user presses, types or releases a key. Related listener: KeyListener.
+
+WindowEvent: Represents an event relating to a window, for example, when a window is closed, activated or deactivated. Related listener: WindowListener.
+
+MouseEvent: Represents any event related to a mouse, such as when a mouse is clicked or pressed. Related listener: MouseListener.
+
+
+
+SWING Event Classes
+
+Following is the list of commonly used Event classes.
+
+Sr.No.	Class & Description
+
+1	AWTEvent
+It is the root event class for all SWING events. This class and its subclasses supercede the original java.awt.Event class.
+
+2	ActionEvent
+The ActionEvent is generated when the button is clicked or the item of a list is double-clicked.
+
+3	InputEvent
+The InputEvent class is the root event class for all component-level input events.
+
+4	KeyEvent
+On entering the character the Key event is generated.
+
+5	MouseEvent
+This event indicates a mouse action occurred in a component.
+
+6	WindowEvent
+The object of this class represents the change in the state of a window.
+
+7	AdjustmentEvent
+The object of this class represents the adjustment event emitted by Adjustable objects.
+
+8	ComponentEvent
+The object of this class represents the change in the state of a window.
+
+9	ContainerEvent
+The object of this class represents the change in the state of a window.
+
+10	MouseMotionEvent
+The object of this class represents the change in the state of a window.
+
+11	PaintEvent
+The object of this class represents the change in the state of a window.
+
+
+Answer5-B)
+
+
+Event			Generated by		Listener Interface		Methods in them
+
+Key event			A key is pressed,		KeyListener		keyPressed() 
+			released or typed					keyReleased() 
+									keyTyped()
+
+Mouse event		Mouse button is 		MouseListener		mouseClicked() 
+			clicked,pressed or 					mouseEntered()
+			released, Mouse 					mouseExited() 
+			pointer enters 					mousePressed() 
+			leaves a component					mouseReleased()
+
+Mouse event		Mouse pointer is 		MouseMotionListener	mouseDragged() 
+			dragged or moved					mouseMoved()
+															
+
+
+Mouse Events
+ 
+Event Class		MouseEvent
+Listener Interface		MouseListener
+
+Listener Methods						public void mouseEntered(MouseEvent event) 
+							public void mouseExited(MouseEvent event) 
+							public void mouseClicked(MouseEvent event) 
+							public void mousePressed(MouseEvent event) 
+
+							public void mouseReleased(MouseEvent event) 
+							By looking at the name of the methods, it is clear which
+							activity invokes which method. 
+
+							event.getX() returns (int) the x coordinate of mouse position. 
+							event.getY() returns (int) the y coordinate of mouse position. 
+							event.getClickCount() returns (int) the number of mouse clicks.
+
+
+
+Keyboard Events
+
+Whenever a key is pressed, an object of the KeyEvent class is generated.
+
+Event Class			KeyEvent
+Listener Interface			KeyListener
+
+Listener Methods						public void keyPressed(KeyEvent event) 
+							Invoked when a key is pressed. 
+
+							public void keyReleased(KeyEvent event) 
+
+							Invoked when a key is released. 
+
+							public void keyTyped(KeyEvent event) 
+
+							Invoked when a key is typed (pressed and released).
+
+							KeyEvent class
+							For a list of Class variables (virtual key codes), which are defined as static
+							and final. 
+							
+							event.getKeyChar() returns (char) the character pressed. 
+
+							event.getKeyCode() returns (int) the "virtual key code", see table below. 
+
+							event.getModifiers().
+
+							event.isShiftDown() returns (boolean) true if shift key is down. 
+
+							event.isControlDown() returns (boolean) true if control key is down. 
+
+							event.isAltDown() returns (boolean) true if alt key is down 
+
+							KeyEvent.getKeyModifiersText(int modifiers) returns (String).
+
+							KeyEvent.getKeyText(int keycode) returns (String).
+
+
+
+
+
+Mouse Motion Activities
+
+Moving and dragging the mouse generates  an object of the MouseEvent class.
+ 
+Event Class			MouseEvent
+Listener Interface			MouseMotionListener
+
+Listener Methods						public void mouseMoved(MouseEvent event) 
+							Invoked when the mouse button has been moved on a component
+							(with no buttons down).
+
+							public void mouseDragged(MouseEvent event)
+
+							Invoked when a mouse button is pressed on a component and then dragged.
+
+							event.getX() returns (int) the x coordinate of mouse position. 
+
+							event.getY() returns (int) the y coordinate of mouse position. 
+
+							event.getClickCount() returns (int) the number of mouse clicks.
+

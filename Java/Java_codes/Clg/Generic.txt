@@ -1,0 +1,109 @@
+﻿import java.util.*;
+
+class Complex<X>
+{
+	int m,n;
+	String arr[][][];
+	static int i=0,j=0;
+
+	Complex(int m,int n)
+	{
+	this.m=m;
+	this.n=n;
+	arr=new String[20][m][n];
+	this.generateRandomNumber();
+	}
+	
+	public String toString()
+	{
+		for(int a=0;a<m;a++)
+		{
+			for(int b=0;b<n;b++)
+				System.out.print(arr[j][a][b]+"\t");
+			System.out.println("");
+		}
+
+		j++;
+		return "\n";
+	}
+	void generateRandomNumber()
+	{
+		Random rand = new Random(100);
+		 for(int a=0;a<m;a++)
+	   	   for(int b=0;b<n;b++)
+	      	     this.arr[i][a][b]=(new X(rand.nextInt(100)+1)+" + i"+new X(rand.nextInt(100)+1));
+		if(i<=18)
+			i++;
+	}
+}
+
+
+
+class Matrix<X>
+{
+	int m,n;
+	X arr[][][];
+	static int i=0,j=0;
+
+	Matrix(int m,int n)
+	{
+	this.m=m;
+	this.n=n;
+	arr=new X[20][m][n];
+	this.generateRandomNumber();
+	}
+	
+	public String toString()
+	{
+		for(int a=0;a<m;a++)
+		{
+			for(int b=0;b<n;b++)
+				System.out.print(arr[j][a][b]+"\t");
+			System.out.println("");
+		}
+
+		j++;
+		return "\n";
+	}
+	void generateRandomNumber()
+	{
+		Random rand = new Random(100);
+		 for(int a=0;a<m;a++)
+	   	   for(int b=0;b<n;b++)
+	      	     this.arr[i][a][b]=new X(rand.nextInt(100)+1);
+		if(i<=18)
+			i++;
+	}
+
+	public static void main(String[] args)
+	{	
+	
+		ArrayList<Matrix<Integer>> m=new ArrayList<Matrix<Integer>>();
+		
+		for(int i=0;i<20;i++)
+		{
+		Random r=new Random(10);
+		m.add(new Matrix<Integer>(Math.abs(r.nextInt(10)+2),Math.abs(r.nextInt(10))+2));
+		}
+
+		System.out.println("Integer Matrix");
+		for(int i=0;i<m.size();i++)
+			System.out.println(m.get(i));
+			
+			
+		ArrayList<Complex<Integer>> M=new ArrayList<Complex<Integer>>();
+		
+		for(int i=0;i<20;i++)
+		{
+		Random r=new Random(10);
+		M.add(new Complex<Integer>(Math.abs(r.nextInt(10)+2),Math.abs(r.nextInt(10))+2));
+		}
+
+		System.out.println("Complex Matrix");
+		for(int i=0;i<m.size();i++)
+			System.out.println(M.get(i));
+			
+		
+	
+	}
+}
