@@ -1,0 +1,179 @@
+Create table Dept ( DepartmentId varchar2(4), DeptName varchar2(20), ManagerId Number(4), ManagerName Number(4),LocationId Number(4) );
+
+Insert into Dept(DepartmentId , DeptName , ManagerId, ManagerName,LocationId ) values (1,'Student',11,'Monica',111);
+)
+
+select DepartmentId,Deptname fom Dept;
+9
+select deptname , managername from deptname;
+delete from dept;
+
+create table friend (Name varchar2(15),Address varchar2(30), Mobile_No Number(10), Highest_Degree varchar2(6),Marks_in_Highest_Degree Number(3));
+
+select name,Highest_Degree,marks from friends;
+
+delete from friends where name like 'P%';
+
+select * from friends order by marks desc;
+
+create table classmates (Rollno Number(2),Name varchar(30),Address varchar2(6),Mobile_No Number(10),Marks_in_Test Number(3));
+select name from classmates where Rollno > 20 and Rollno <30;
+select * from classmates order by Rollno;
+Select name,marks AS Percentage from classmates;
+
+create table Employee (Emp_Id Number(5),Name varchar2(30), Email varchar2(25), Mobile_No Number(10),Salary Number(8,2));
+
+select * from Employee;
+
+Update Employee set salary=40500 where Name='Sumit';
+
+delete from Employee;
+
+
+
+
+create table Department1(
+DeptNo Number(5) Primary key,
+D_Name Varchar2(10) NOT NULL,
+LOC Number(5) NOT NULL,
+FOREIGN KEY(DeptNo) REFERENCES Employee(DeptNo) );
+
+Insert into employee1 (ename,job,emp_no,deptno) values('Sumit','Dev',001,0101) ;
+
+Insert into employee1 (ename,job,emp_no,deptno) values('Sanjay','Test',002,0102) ;
+
+Insert into employee1 (ename,job,emp_no,deptno) values('Charu','Eng',003,0103) ;
+
+Insert into employee1 (ename,job,emp_no,deptno) values('Ruchi','Aut',004,0104) ;
+
+Insert into employee1 (ename,job,emp_no,deptno) values('Varsha','App',005,0105) ;
+
+
+
+create table Employee3 (
+Emp_No Number(5) Primary key,
+Ename varchar2(10) NOT NULL,
+DeptNo Number(5) ,
+Job varchar2(10),
+Hire_Date date DEFAULT GETDATE()
+);
+
+create table Employee (
+Emp_No Number(5) ,
+Ename varchar2(10) NOT NULL,
+DeptNo Number(5) ,
+Job varchar2(10),
+Hire_Date date DEFAULT '19-JUL-24' 
+primary key(Emp_No)
+);
+
+
+
+create table Employee1 (
+Ename varchar2(10)NOT NULL,
+Job varchar2(10),
+Hire_Date date DEFAULT '19-JUL-24', 
+Emp_No Number(5) ,
+DeptNo Number(5),
+primary key (DeptNo)
+);
+
+create table Department1(
+DepartmentNo Number(5) primary key,
+D_Name Varchar2(10) NOT NULL,
+LOC Number(5) NOT NULL,
+FOREIGN KEY(DepartmentNo) REFERENCES Employee1(DeptNo) );
+
+
+
+
+
+
+Insert into department1 values(104,'Dev',101) ;
+Insert into department1 values(101,'Test',200) ;
+Insert into department1 values(105,'Eng',301) ;
+Insert into department1 values(102,'Aut',251) ;
+Insert into department1 values(103,'App',270) ;
+
+
+
+
+
+5.1
+
+create table employee1
+(
+EmpNo Number(5),
+Ename Varchar2(10),
+DeptNo Number(5),
+Job Varchar2(5),
+Hiredate date
+);
+
+a)
+Alter table Employee1 modify EmpNo Number(5) primary key;
+
+b)
+Alter table Employee1 modify Ename Varchar2(10) NOT NULL;
+
+c)
+Alter table Employee1 modify Hiredate date DEFAULT CURRENT_TIMESTAMP;
+
+
+
+5.2
+create table Department3
+(
+DeptNo Number(5),
+Dname varchar2(10),
+LOC Number(3)
+);
+
+a)
+Alter table Department3 MODIFY DeptNo Number(5) primary key;
+
+b)
+Alter table Department3 modify Dname VARCHAR2(10) NOT NULL;
+
+c)
+Alter table Department3 modify LOC NUMBER(3) NOT NULL;
+
+	
+Alter table Department3 ADD NOT NULL(Dname,LOC);
+
+d)
+Alter table Employee3 modify DeptNo Number(5) UNIQUE NOT NULL;
+ALTER TABLE EMPLOYEE1 ADD CONSTRAINT FOREIGN KEY(DeptNo) REFERENCES Department1(DeptNo) );
+
+
+set serveroutput on;
+declare
+n number(2);
+salary emp2.sal%TYPE;
+begin
+n:=&n;
+select sal into salary from (select rownum as rn,sal from(select sal from emp2 order by sal desc)) where rn=n ;
+dbms_output.put_line('Max Salary is '||salary);
+end;
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

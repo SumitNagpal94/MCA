@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utxf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script>
+    	
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+       <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#">Result</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Welcome, User</a></li>
+            <li><a href="admin.html">Admin Login</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+
+    </nav>
+
+    <header id="header">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="text-center">Student Result</h1>
+          </div>
+        </div>
+      </div>
+    </header>
+
+   	<section id="main">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+            <form  class="well" action="StudentRetrieval.jsp" method="post" >
+                  <div class="form-group">
+                    <label><h2>Enter Student ID</h2></label>
+                    <input type="number" class="form-control" placeholder="Enter Student ID" id="e_id" name="sid" required>
+                  </div>
+                  <button type="submit" class="btn btn-success btn-xs">Submit</button>
+              </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer id="footer">
+      <p>Copyright JMI, &copy; 2020</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,264 @@
+1
+
+Create table Dept ( DepartmentId varchar2(4), DeptName varchar2(20), ManagerId Number(4), ManagerName Number(4),LocationId Number(4) );
+
+a)
+Insert into Dept(DepartmentId , DeptName , ManagerId, ManagerName,LocationId ) values (1,'Student',11,'Monica',111);
+
+Insert into Dept values (7,'Admin',15,'Shreya',115);
+
+
+
+b)
+select DepartmentId as Did,Deptname from Dept;
+
+c)
+select deptname , managername from dept;
+d)
+delete from dept;
+
+2
+create table friends (Name varchar2(15),Address varchar2(30), Mobile_No Number(10), Highest_Degree varchar2(6),Marks_in_Highest_Degree Number(3));
+
+
+a)
+insert into friends (Name,Address,Mobile_No,Highest_Degree,Marks_in_Highest_Degree)
+values ('Sumit','West Delhi',9999999901,'MCA',70);
+
+insert into friends (Name,Address,Mobile_No,Highest_Degree,Marks_in_Highest_Degree)
+values ('Ankit','North Delhi',9999999902,'Pharma',65);
+
+insert into friends (Name,Address,Mobile_No,Highest_Degree,Marks_in_Highest_Degree)
+values ('Mariam','East Delhi',9999999903,'Dip',80);
+
+insert into friends (Name,Address,Mobile_No,Highest_Degree,Marks_in_Highest_Degree)
+values ('Kavya','South Delhi',9999999904,'MBA',75);
+
+insert into friends (Name,Address,Mobile_No,Highest_Degree,Marks_in_Highest_Degree)
+values ('Ifra','North East Delhi',9999999905,'MA',76);
+
+b)
+select name,Highest_Degree,marks_in_highest_degree from friends;
+
+c)
+Select * from friends order by name;
+
+d)
+delete from friends where name like 'P%';
+
+e)
+select * from friends order by marks_in_highest_degree desc;
+
+3
+create table classmates (Rollno Number(2),Name varchar(30),Address varchar2(6),Mobile_No Number(10),Marks_in_Test Number(3));
+
+a)
+insert into classmates (RollNo,Name,Address,Mobile_No,Marks_in_test) values 
+(01,'Sumit','Delhi',9999999901,70);
+
+insert into classmates (RollNo,Name,Address,Mobile_No,Marks_in_test) values
+ (02,'Ankit','Rj',9999999902,75);
+
+insert into classmates (RollNo,Name,Address,Mobile_No,Marks_in_test) values 
+(03,'Mariam','Dli',9999999903,90);
+
+insert into classmates (RollNo,Name,Address,Mobile_No,Marks_in_test) values 
+(04,'Ifra','Md',9999999904,80);
+
+insert into classmates (RollNo,Name,Address,Mobile_No,Marks_in_test) values 
+(05,'kavya','Lck',9999999905,78);
+
+b)
+select name from classmates where Rollno > 20 and Rollno <30;
+
+c)
+select * from classmates order by Rollno;
+
+d)
+Select name,marks_in_test AS Percentage from classmates;
+
+
+4
+create table Employees (Emp_Id Number(5),Name varchar2(30), Email varchar2(25), Mobile_No Number(10),Salary Number(8,2));
+
+a)
+insert into employees (Emp_Id,Name,Email,Mobile_No,Salary) 
+values (001,'Sumit','sumitnagpal94@gmail.com',9999999901,40000);
+
+insert into employees (Emp_Id,Name,Email,Mobile_No,Salary) 
+values (005,'Sanjay','sanjay4@gmail.com',9999999902,41000);
+
+insert into employees (Emp_Id,Name,Email,Mobile_No,Salary) 
+values (0010,'Ruchi','ruchi9@gmail.com',9999999903,35000);
+
+insert into employees (Emp_Id,Name,Email,Mobile_No,Salary) 
+values (0041,'Sidharth','sidd@gmail.com',9999999904,45000);
+
+insert into employees (Emp_Id,Name,Email,Mobile_No,Salary) 
+values (0017,'Varsha','varsh24@gmail.com',9999999905,50000);
+
+b)
+select * from Employees;
+
+c)
+Update Employees set salary=40500 where Name='Sumit';
+
+d)
+delete from Employees;
+
+Date YYYY-MM-DD format
+
+
+
+
+5.1
+
+create table employee1
+(
+EmpNo Number(5),
+Ename Varchar2(10),
+DeptNo Number(5),
+Job Varchar2(5),
+Hiredate date
+);
+
+a)
+Alter table Employee1 modify EmpNo Number(5) primary key;
+
+b)
+Alter table Employee1 modify Ename Varchar2(10) NOT NULL;
+
+c)
+Alter table Employee1 modify Hiredate date DEFAULT CURRENT_TIMESTAMP;
+
+
+
+5.2
+create table Department3
+(
+DeptNo Number(5),
+Dname varchar2(10),
+LOC varchar2(3)
+);
+
+a)
+Alter table Department3 MODIFY DeptNo Number(5) primary key;
+
+b)
+Alter table Department3 modify Dname VARCHAR2(10) NOT NULL;
+
+c)
+Alter table Department3 modify LOC NUMBER(3) NOT NULL;
+
+	
+Alter table Department3 ADD NOT NULL(Dname,LOC);
+
+d)
+Alter table Employee3 modify DeptNo Number(5) UNIQUE NOT NULL;
+ALTER TABLE EMPLOYEE1 UPDATE FOREIGN KEY(DeptNo) REFERENCES Department1(DeptNo) );
+
+
+
+
+INSERT INTO Employee1(empno,ename,deptno,job) values (1,'Sumit',104,'Dev');
+
+INSERT INTO Employee1(empno,ename,deptno,job) values (2,'Ruchi',101,'Test');
+
+INSERT INTO Employee1(empno,ename,deptno,job) values (3,'Varsha',105,'App');
+
+INSERT INTO Employee1(empno,ename,deptno,job) values (4,'Sanjay',104,'Aut');
+
+INSERT INTO Employee1(empno,ename,deptno,job) values (5,'Ankit',102,'IT');
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+
+5)
+
+
+create table Employee1 (
+Ename varchar2(10) NOT NULL,
+Job varchar2(10),
+Hire_Date date DEFAULT '19-JUL-24', 
+Emp_No Number(5) ,
+DeptNo Number(5),
+primary key (Emp_No),
+FOREIGN KEY(DeptNo) REFERENCES Employee(DeptNo) 
+);
+
+Insert into employee1 (empno,Ename,deptno,job) values('0','Dev',001,0101) ;
+
+Insert into employee1 (ename,job,emp_no,deptno) values('Sanjay','Test',002,0102) ;
+
+Insert into employee1 (ename,job,emp_no,deptno) values('Charu','Eng',003,0103) ;
+
+Insert into employee1 (ename,job,emp_no,deptno) values('Ruchi','Aut',004,0104) ;
+
+Insert into employee1 (ename,job,emp_no,deptno) values('Varsha','App',005,0105) ;
+
+
+create table Department1(
+DeptNo Number(5) Primary key,
+D_Name Varchar2(10) NOT NULL,
+LOC Number(5) NOT NULL
+);
+
+
+
+Insert into department1 values(104,'Dev','DLI') ;
+Insert into department1 values(101,'Test','LCK') ;
+Insert into department1 values(105,'Eng','RJ') ;
+Insert into department1 values(102,'Aut','MP') ;
+Insert into department1 values(103,'App','UP') ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+create table Employee3 (
+Emp_No Number(5) Primary key,
+Ename varchar2(10) NOT NULL,
+DeptNo Number(5) ,
+Job varchar2(10),
+Hire_Date date DEFAULT GETDATE()
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

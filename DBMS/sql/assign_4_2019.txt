@@ -1,0 +1,93 @@
+Q2: Write a PL/SQL code to check whether a number is prime or not.
+
+set serveroutput on;
+declare
+	i number(10);
+	a number(1);
+	num number(10);
+begin
+	num:=&num;
+	a:=0;
+	i:=2;
+	while i<num/2
+	loop
+		if (mod(num,i)=0) then
+			a:=1;
+			exit;
+		end if;
+		i:=i+1;
+	end loop;
+	if (a=0) then
+		dbms_output.put_line('Entered Number is Prime');
+	else
+		dbms_output.put_line('Entered Number is Not Prime');
+	end if;
+end;
+/
+
+Q3: Write a PL/SQL code to check whether a number is palindrome or not.
+
+set serveroutput on;
+
+
+declare
+	num number(10);
+	num1 number(10);
+	TYPE array IS VARRAY(10) OF NUMBER(10);
+	total number(2);
+	i number(2);
+begin
+	num:=&num;
+	num1:=num;
+	total:=1;
+	i:=1;
+	while(num1!=0) loop
+	array(total):=mod(num1,10);
+	total:=total+1;
+	num:=num/10;
+	end loop;
+	while array(i)=array(total)  
+	loop
+	i:=i+1;
+	total:=total-1;
+	end loop;
+	if (i=total) then
+		dbms_output.put_line('Entered Number is Palindrome');
+	else
+		dbms_output.put_line('Entered Number is Not Palindrome');
+	end if;
+end;
+/
+
+
+
+declare
+	num number(10);
+	num1 number(10);
+	rev number(10);
+begin
+	rev:=0;
+	num:=&num;
+	num1:=num;
+	while num1!=0 loop
+		rev:=rev*10+mod(num1,10);
+		num1:=num1/10;
+	end loop;
+	if (num=rev) then
+		dbms_output.put_line('Entered Number is Palindrome');
+	else
+		dbms_output.put_line('Entered Number is Not Palindrome');
+	end if; 
+end;
+/
+
+
+Q4: Write a PL/SQL code to compute factorial of a given number.
+
+
+Q5: Write a PL/SQL code to print Fibonacci series.
+Q6: Write a PL/SQL code to display sum of first ten natural numbers.
+Q7: Write a PL/SQL code to compute area and perimeter of a circle.
+Q8: Write a PL/SQL code to find the greatest among three numbers.
+Q9: Write a PL/SQL code to display whether a number is even or odd.
+Q10: Write a PL-SQL script to compare three given numbers and display them in ascending order.

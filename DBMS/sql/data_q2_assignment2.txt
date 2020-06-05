@@ -1,0 +1,21 @@
+insert into studies values('Rakesh','Pentafour','PGDCA',12000);
+insert into studies values('Mariam','PRAGATHI','DCA',16000);
+insert into studies values('Vaishali','UP','MCA',14000);
+insert into studies values('Ankit','Rajasthan','Pharma',18000);
+insert into studies values('Sumit','Delhi','MBA',22000);
+
+
+insert into software values('Rakesh','Database','Oracle',7000,4000,2);
+insert into software values('Mariam','OS','C',2500,5000,3);
+insert into software values('Vaishali','FrameWork','VB',6500,3500,2);
+insert into software values('Ankit','DB','Oracle',3000,7000,3);
+insert into software values('Sumit','App','Java',3200,6500,2);
+
+
+
+insert into programmer values('Rakesh','03-Apr-96','10-Nov-14','M','C','Oracle',6000);
+insert into programmer values('Mariam','30-Aug-97','02-Jan-18','F','Pascal','C',7000);
+insert into programmer values('Vaishali','18-Feb-95','24-Sep-16','F','VB','Pascal',7500);
+insert into programmer values('Ankit','10-Dec-93','13-Jan-13','M','VB','Oracle',14000);
+insert into programmer values('Sumit','06-Aug-98','19-Mar-15','M','C++','Java',18000);
+
